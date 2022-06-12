@@ -1,0 +1,27 @@
+<!-- templates/posts/index.html -->
+{% extends 'base.html' %}
+{% block title %}
+  Записи сообщества {{group}}
+{% endblock %}
+{% block content %}
+  <div class="container py-5">     
+    <h1>Здесь будет информация о группах проекта YaTube</h1>
+    <p>
+    <article>
+      <ul>
+        {% for post in posts %}
+        <li>
+          Автор: {{ post.author.get_full_name }}
+        </li>
+        <li>
+          Дата публикации: {{ post.pub_date|date:"d E Y" }}
+        </li>
+      </ul>
+      <p>
+        {{ post.text }}
+      </p>
+    </article>
+    {% if not forloop.last %}<hr>{% endif %}
+    {% endfor %}
+  </div> 
+{% endblock %}
