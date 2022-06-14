@@ -1,15 +1,13 @@
-<!-- templates/posts/index.html -->
 {% extends 'base.html' %}
 {% block title %}
-  Записи сообщества {{group}}
+<title>Записи сообщества {{ group }}<title>
 {% endblock %}
 {% block content %}
   <div class="container py-5">     
-    <h1>Здесь будет информация о группах проекта YaTube</h1>
-    <p>
+    <h1>{{ text }}</h1>
     <article>
+    {% for post in posts %}
       <ul>
-        {% for post in posts %}
         <li>
           Автор: {{ post.author.get_full_name }}
         </li>
@@ -20,8 +18,8 @@
       <p>
         {{ post.text }}
       </p>
-    </article>
-    {% if not forloop.last %}<hr>{% endif %}
+      {% if not forloop.last %}<hr>{% endif %}
     {% endfor %}
+    </article>
   </div> 
 {% endblock %}
