@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 
 from .models import Post, Group
 
-COUNT_POST: int = 10
+LIM_POST: int = 10
 
 
 def index(request):
@@ -10,7 +10,7 @@ def index(request):
     text = 'Это главная страница проекта Yatube'
     a = 'group'
     b = 'author'
-    posts = Post.objects.select_related(a, b).order_by('-pub_date')[:COUNT_POST]
+    posts = Post.objects.select_related(a, b).order_by('-pub_date')[:LIM_POST]
     context = {
         'posts': posts,
         'text': text,
@@ -23,7 +23,7 @@ def group_posts(request, slug):
     title = 'Записи групп'
     text = 'Лев Толстой - зеркало русской революции.'
     group = get_object_or_404(Group, slug=slug)
-    posts = Post.objects.filter(group=group).order_by('-pub_date')[:COUNT_POST]
+    posts = Post.objects.filter(group=group).order_by('-pub_date')[:LIM_POST]
     context = {
         'group': group,
         'posts': posts,
