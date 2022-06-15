@@ -8,7 +8,9 @@ COUNT_POST: int = 10
 def index(request):
     title = 'Последние обновления на сайте'
     text = 'Это главная страница проекта Yatube'
-    posts = Post.objects.select_related('group', 'author').order_by('-pub_date')[:COUNT_POST]
+    a = 'group'
+    b = 'author'
+    posts = Post.objects.select_related(a, b).order_by('-pub_date')[:COUNT_POST]
     context = {
         'posts': posts,
         'text': text,
