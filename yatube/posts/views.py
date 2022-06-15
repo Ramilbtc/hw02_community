@@ -6,28 +6,21 @@ LIM_POST: int = 10
 
 
 def index(request):
-    title = 'Последние обновления на сайте'
-    text = 'Это главная страница проекта Yatube'
-    a = 'group'
-    b = 'author'
-    posts = Post.objects.select_related(a, b).order_by('-pub_date')[:LIM_POST]
+    posts = Post.objects.select_related('group', 'author')\
+        .order_by('-pub_date')[:LIM_POST]
     context = {
         'posts': posts,
-        'text': text,
-        'title': title,
     }
     return render(request, 'posts/index.html', context)
 
 
 def group_posts(request, slug):
-    title = 'Записи групп'
-    text = 'Лев Толстой - зеркало русской революции.'
+    description = 'Группа тайных поклонников графа'
     group = get_object_or_404(Group, slug=slug)
     posts = Post.objects.filter(group=group).order_by('-pub_date')[:LIM_POST]
     context = {
         'group': group,
         'posts': posts,
-        'text': text,
-        'title': title,
+        'description': description,
     }
     return render(request, 'posts/group_list.html', context)
