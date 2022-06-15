@@ -5,8 +5,8 @@
 {% block content %}
   <div class="container py-5">     
     <h1>{{ text }}</h1>
-    <article>
     {% for post in posts %}
+    <article>
       <ul>
         <li>
           Автор: {{ post.author.get_full_name }}
@@ -22,7 +22,7 @@
       <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a> 
       {% endif %}
       {% if not forloop.last %}<hr>{% endif %}
-    {% endfor %}
     </article>
+    {% endfor %}
   </div> 
 {% endblock %}

@@ -2,13 +2,13 @@ from django.shortcuts import render, get_object_or_404
 
 from .models import Post, Group
 
-COUNT_STR: int = 10
+COUNT_POST: int = 10
 
 
 def index(request):
-    posts = Post.objects.select_related().order_by('-pub_date')[:COUNT_STR]
     title = 'Последние обновления на сайте'
     text = 'Это главная страница проекта Yatube'
+    posts = Post.objects.select_related('group', 'author').order_by('-pub_date')[:COUNT_POST]
     context = {
         'posts': posts,
         'text': text,
@@ -19,9 +19,9 @@ def index(request):
 
 def group_posts(request, slug):
     title = 'Записи групп'
-    text = 'Здесь будет информация о группах проекта Yatube'
+    text = 'Лев Толстой - зеркало русской революции.'
     group = get_object_or_404(Group, slug=slug)
-    posts = Post.objects.filter(group=group).order_by('-pub_date')[:COUNT_STR]
+    posts = Post.objects.filter(group=group).order_by('-pub_date')[:COUNT_POST]
     context = {
         'group': group,
         'posts': posts,
