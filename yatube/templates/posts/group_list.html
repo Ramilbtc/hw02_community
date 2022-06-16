@@ -4,9 +4,9 @@
 {% endblock %}
 {% block content %}
   <div class="container py-5"> 
-    <h1>Лев Толстой - зеркало русской революции.</h1>
+    <h1>{{ group.title }}</h1>
     <p>
-      {{ description }}
+      {{ group.description }}
     </p>
     {% for post in posts %}
     <article>
